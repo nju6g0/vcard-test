@@ -17,17 +17,20 @@ function App() {
       }
     }
 
-    // const handleKeyDown = (event) => {
-    //   console.log(event.key)
-    //   if (event.key === 'PrintScreen') {
-    //     console.log('Screenshot detected')
-    //     setIsScreenshotDetected(true)
-    //   }
-    // }
+    const handleKeyDown = (event) => {
+      console.log(event.key)
+      setIsScreenshotDetected(false)
 
-    // const handleTouchStart = () => {
-    //   console.log('Touch event detected')
-    // }
+      // if (event.key === 'PrintScreen') {
+      //   console.log('Screenshot detected')
+      //   setIsScreenshotDetected(true)
+      // }
+    }
+
+    const handleTouchStart = () => {
+      console.log('Touch event detected')
+      setIsScreenshotDetected(false)
+    }
     const handleBlur = () => {
       setEventName('Window is blurred')
       setIsScreenshotDetected(true)
@@ -49,8 +52,8 @@ function App() {
     }
 
     document.addEventListener('visibilitychange', handleVisibilityChange)
-    // window.addEventListener('keydown', handleKeyDown)
-    // window.addEventListener('touchstart', handleTouchStart)
+    window.addEventListener('keydown', handleKeyDown)
+    window.addEventListener('touchstart', handleTouchStart)
     // window.addEventListener('blur', handleBlur)
     // window.addEventListener('focus', handleFocus)
     // window.addEventListener('pagehide', handlePageHide)
@@ -58,8 +61,8 @@ function App() {
 
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange)
-      // window.removeEventListener('keydown', handleKeyDown)
-      // window.removeEventListener('touchstart', handleTouchStart)
+      window.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener('touchstart', handleTouchStart)
       // window.removeEventListener('blur', handleBlur)
       // window.removeEventListener('focus', handleFocus)
       // window.removeEventListener('pagehide', handlePageHide)
