@@ -1,7 +1,6 @@
 import VCard from 'vcard-creator'
 
 function genVcardFromCreator(values) {
-  console.log(values)
   // Define a new vCard
   const myVCard = new VCard()
 
@@ -18,23 +17,22 @@ function genVcardFromCreator(values) {
     // Add work data
     .addCompany(values.company)
     .addJobtitle(values.title)
-    .addRole('Data Protection Officer')
+    // .addRole('Data Protection Officer')
     .addEmail(values.email)
-    .addPhoneNumber(1234121212, 'PREF;WORK')
+    // .addPhoneNumber(1234121212, 'PREF;WORK')
     .addPhoneNumber(values.phone, 'WORK')
-    .addAddress(
-      null,
-      null,
-      'street',
-      'worktown',
-      null,
-      'workpostcode',
-      'Belgium'
-    )
-    .addSocial('https://twitter.com/desloovere_j', 'Twitter', 'desloovere_j')
-    .addURL('http://www.jeroendesloovere.be')
+  // .addAddress(
+  //   null,
+  //   null,
+  //   'street',
+  //   'worktown',
+  //   null,
+  //   'workpostcode',
+  //   'Belgium'
+  // )
+  // .addSocial('https://twitter.com/desloovere_j', 'Twitter', 'desloovere_j')
+  // .addURL('http://www.jeroendesloovere.be')
 
-  console.log(myVCard.toString())
   return myVCard
 }
 
@@ -54,7 +52,7 @@ const genVcard = (values) => {
   const vcard = `BEGIN:VCARD
     ${makeVCardVersion()}
     ${makeVCardInfo('cardInfo')}
-    ${makeVCardName(values.name)}
+    ${makeVCardName(`${values.firstname}${values.lastname}`)}
     ${makeVCardOrg(values.company)}
     ${makeVCardTitle(values.title)}
     ${makeVCardPhoto('https://unsplash.com/photos/an-elephant-is-walking-down-a-dirt-road-I6Qh6UAYazg')}
