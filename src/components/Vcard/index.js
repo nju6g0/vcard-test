@@ -64,15 +64,16 @@ function Vcard() {
 
     let vcardValues = {}
     Object.keys(formValue).forEach((key) => {
+      console.log(key, formValue[key])
       if (formValue[key].checked) {
         vcardValues[key] = formValue[key].text
       }
     })
     // const vcard = genVcard(vcardValues)
-    const vcard = genVcardFromCreator()
+    const vcard = genVcardFromCreator(vcardValues)
     downloadToFile(
       vcard,
-      `${formValue[FORM_FIELD.NAME].text}Vcard.vcf`,
+      `${formValue[FORM_FIELD.FIRSTNAME].text}Vcard.vcf`,
       'text/vcard'
     )
   }

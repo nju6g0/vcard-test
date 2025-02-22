@@ -1,6 +1,7 @@
 import VCard from 'vcard-creator'
 
 function genVcardFromCreator(values) {
+  console.log(values)
   // Define a new vCard
   const myVCard = new VCard()
 
