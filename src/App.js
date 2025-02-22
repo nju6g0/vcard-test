@@ -41,14 +41,19 @@ function App() {
     }))
   }
   const downloadToFile = (content, filename, contentType) => {
-    const a = document.createElement('a')
     const file = new Blob([content], { type: contentType })
-
-    a.href = window.URL.createObjectURL(file)
+    const url = window.URL.createObjectURL(file)
+    const a = document.createElement('a')
+    a.href = url
     a.setAttribute('download', filename)
     document.body.appendChild(a)
-    a.click()
-    a.parentNode.removeChild(a)
+
+    window.setTimeout(() => {
+      a.click()
+      // a.parentNode.removeChild(a)
+      document.body.removeChild(a)
+      URL.revokeObjectURL(url) // 確保釋放資源
+    }, 100)
   }
   const handleDownload = (e) => {
     e.preventDefault()
