@@ -1,6 +1,7 @@
 import VCard from 'vcard-creator'
 
 function genVcardFromCreator(vcardValues) {
+  console.log(vcardValues)
   let vcard = 'BEGIN:VCARD\nVERSION:3.0\n'
   Object.keys(vcardValues).forEach((key) => {
     if (key === 'photo') {
@@ -10,6 +11,7 @@ function genVcardFromCreator(vcardValues) {
     }
   })
   vcard += 'END:VCARD'
+  console.log(vcard)
   return vcard
   // Define a new vCard
   // const myVCard = new VCard()

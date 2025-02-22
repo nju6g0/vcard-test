@@ -89,7 +89,8 @@ function Vcard() {
     Object.keys(formValue).forEach((key) => {
       console.log(key, formValue[key])
       if (formValue[key].checked) {
-        vcardValues[key] = formValue[key].text
+        vcardValues[key] =
+          key === 'photo' ? formValue[key].file : formValue[key].text
       }
     })
     // const vcard = genVcard(vcardValues)
