@@ -60,7 +60,12 @@ function App() {
     )
   }
 
-  return <Vcard />
+  return (
+    <>
+      <p>test visibility change</p>
+      <Vcard />
+    </>
+  )
 }
 
 export default App
