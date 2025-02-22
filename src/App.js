@@ -31,6 +31,10 @@ function App() {
       console.log('Touch event detected')
       setIsScreenshotDetected(false)
     }
+    const handleMouseDown = () => {
+      console.log('Mouse event detected')
+      // setIsScreenshotDetected(false)
+    }
     const handleBlur = () => {
       setEventName('Window is blurred')
       setIsScreenshotDetected(true)
@@ -54,6 +58,8 @@ function App() {
     document.addEventListener('visibilitychange', handleVisibilityChange)
     window.addEventListener('keydown', handleKeyDown)
     window.addEventListener('touchstart', handleTouchStart)
+    // window.addEventListener('mousedown', handleMouseDown)
+
     // window.addEventListener('blur', handleBlur)
     // window.addEventListener('focus', handleFocus)
     // window.addEventListener('pagehide', handlePageHide)
@@ -63,6 +69,7 @@ function App() {
       document.removeEventListener('visibilitychange', handleVisibilityChange)
       window.removeEventListener('keydown', handleKeyDown)
       window.removeEventListener('touchstart', handleTouchStart)
+      // window.removeEventListener('mousedown', handleMouseDown)
       // window.removeEventListener('blur', handleBlur)
       // window.removeEventListener('focus', handleFocus)
       // window.removeEventListener('pagehide', handlePageHide)
