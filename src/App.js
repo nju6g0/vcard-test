@@ -1,83 +1,14 @@
-import React, { useEffect, useState } from 'react'
-
+import React from 'react'
 import Vcard from './components/Vcard'
+import useScreenshotDetection from './hooks/useScreenshotDetection'
+import usePushNotification from './hooks/usePushNotification'
 
 function App() {
-  const [isScreenshotDetected, setIsScreenshotDetected] = useState(false)
-  const [eventName, setEventName] = useState('')
-
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.hidden) {
-        setEventName('Document is hidden')
-        setIsScreenshotDetected(true)
-      } else {
-        setEventName('Document is visible')
-        // setIsScreenshotDetected(false)
-      }
-    }
-
-    const handleKeyDown = (event) => {
-      console.log(event.key)
-      setIsScreenshotDetected(false)
-
-      // if (event.key === 'PrintScreen') {
-      //   console.log('Screenshot detected')
-      //   setIsScreenshotDetected(true)
-      // }
-    }
-
-    const handleTouchStart = () => {
-      console.log('Touch event detected')
-      setIsScreenshotDetected(false)
-    }
-    const handleMouseDown = () => {
-      console.log('Mouse event detected')
-      // setIsScreenshotDetected(false)
-    }
-    const handleBlur = () => {
-      setEventName('Window is blurred')
-      setIsScreenshotDetected(true)
-    }
-
-    const handleFocus = () => {
-      setEventName('Window is focused')
-      // setIsScreenshotDetected(false)
-    }
-
-    const handlePageHide = () => {
-      setEventName('Page is hidden')
-      setIsScreenshotDetected(true)
-    }
-
-    const handlePageShow = () => {
-      setEventName('Page is visible')
-      // setIsScreenshotDetected(false)
-    }
-
-    document.addEventListener('visibilitychange', handleVisibilityChange)
-    window.addEventListener('keydown', handleKeyDown)
-    window.addEventListener('touchstart', handleTouchStart)
-    // window.addEventListener('mousedown', handleMouseDown)
-
-    // window.addEventListener('blur', handleBlur)
-    // window.addEventListener('focus', handleFocus)
-    // window.addEventListener('pagehide', handlePageHide)
-    // window.addEventListener('pageshow', handlePageShow)
-
-    return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange)
-      window.removeEventListener('keydown', handleKeyDown)
-      window.removeEventListener('touchstart', handleTouchStart)
-      // window.removeEventListener('mousedown', handleMouseDown)
-      // window.removeEventListener('blur', handleBlur)
-      // window.removeEventListener('focus', handleFocus)
-      // window.removeEventListener('pagehide', handlePageHide)
-      // window.removeEventListener('pageshow', handlePageShow)
-    }
-  }, [])
+  const { isScreenshotDetected, eventName } = useScreenshotDetection()
+  // const { showNotification } = usePushNotification()
 
   if (isScreenshotDetected) {
+    // showNotification(eventName)
     return (
       <div
         style={{ width: '100vw', height: '100vh', backgroundColor: 'black' }}
