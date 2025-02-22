@@ -3,13 +3,14 @@ import { Layout, Input, Checkbox, Col, Row, Typography, Button } from 'antd'
 
 import '../../App.css'
 
-import { genVcard, genVcardFromCreator } from '../../utility/genVcard'
+import { genVcardFromCreator } from '../../utility/genVcard'
 
 const { Text } = Typography
 
 const FORM_FIELD = {
   COMPANY: 'company',
-  NAME: 'name',
+  FIRSTNAME: 'firstname',
+  LASTNAME: 'lastname',
   TITLE: 'title',
   PHONE: 'phone',
   EMAIL: 'email',
@@ -17,7 +18,8 @@ const FORM_FIELD = {
 function Vcard() {
   const [formValue, setFormValue] = useState({
     [FORM_FIELD.COMPANY]: { text: '', checked: false },
-    [FORM_FIELD.NAME]: { text: '', checked: false },
+    [FORM_FIELD.FIRSTNAME]: { text: '', checked: false },
+    [FORM_FIELD.LASTNAME]: { text: '', checked: false },
     [FORM_FIELD.TITLE]: { text: '', checked: false },
     [FORM_FIELD.PHONE]: { text: '', checked: false },
     [FORM_FIELD.EMAIL]: { text: '', checked: false },
@@ -42,6 +44,7 @@ function Vcard() {
     }))
   }
   const downloadToFile = (content, filename, contentType) => {
+    console.log(content)
     const file = new Blob([content], { type: contentType })
     const url = window.URL.createObjectURL(file)
     const a = document.createElement('a')

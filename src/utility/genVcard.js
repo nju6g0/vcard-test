@@ -5,33 +5,39 @@ function genVcardFromCreator(values) {
   const myVCard = new VCard()
 
   // Some variables
-  const lastname = 'Desloovere'
-  const firstname = 'Jeroen'
-  const additional = ''
-  const prefix = ''
-  const suffix = ''
+  // const lastname = 'Desloovere'
+  // const firstname = 'Jeroen'
+  // const additional = ''
+  // const prefix = ''
+  // const suffix = ''
 
   myVCard
     // Add personal data
-    .addName(lastname, firstname, additional, prefix, suffix)
-    // Add work data
-    .addCompany('Siesqo')
-    .addJobtitle('Web Developer')
-    .addRole('Data Protection Officer')
-    .addEmail('info@jeroendesloovere.be')
-    .addPhoneNumber(1234121212, 'PREF;WORK')
-    .addPhoneNumber(123456789, 'WORK')
-    .addAddress(
-      null,
-      null,
-      'street',
-      'worktown',
-      null,
-      'workpostcode',
-      'Belgium'
+    .addName(
+      values.lastname,
+      values.firstname
+      // values.additional,
+      // values.prefix,
+      // values.suffix
     )
-    .addSocial('https://twitter.com/desloovere_j', 'Twitter', 'desloovere_j')
-    .addURL('http://www.jeroendesloovere.be')
+    // Add work data
+    .addCompany(values.company)
+    .addJobtitle(values.title)
+    .addRole('Data Protection Officer')
+    .addEmail(values.email)
+    // .addPhoneNumber(1234121212, 'PREF;WORK')
+    .addPhoneNumber(values.phone, 'WORK')
+  // .addAddress(
+  //   null,
+  //   null,
+  //   'street',
+  //   'worktown',
+  //   null,
+  //   'workpostcode',
+  //   'Belgium'
+  // )
+  // .addSocial('https://twitter.com/desloovere_j', 'Twitter', 'desloovere_j')
+  // .addURL('http://www.jeroendesloovere.be')
 
   console.log(myVCard.toString())
   return myVCard
