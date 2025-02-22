@@ -1,51 +1,59 @@
 import VCard from 'vcard-creator'
 
 function genVcardFromCreator(vcardValues) {
-  console.log(vcardValues)
-  let vcard = 'BEGIN:VCARD\nVERSION:3.0\n'
-  Object.keys(vcardValues).forEach((key) => {
-    if (key === 'photo') {
-      vcard += `PHOTO;ENCODING=b;TYPE=JPEG:${vcardValues[key]}\n`
-    } else {
-      vcard += `${key.toUpperCase()}:${vcardValues[key]}\n`
-    }
-  })
-  vcard += 'END:VCARD'
-  console.log(vcard)
-  return vcard
+  // console.log(vcardValues)
+  // let vcard = 'BEGIN:VCARD\nVERSION:3.0\n'
+  // Object.keys(vcardValues).forEach((key) => {
+  //   if (key === 'photo') {
+  //     vcard += `PHOTO;ENCODING=b;TYPE=JPEG:${vcardValues[key]}\n`
+  //   } else {
+  //     vcard += `${key.toUpperCase()}:${vcardValues[key]}\n`
+  //   }
+  // })
+  // vcard += 'END:VCARD'
+  // console.log(vcard)
+  // return vcard
+
   // Define a new vCard
-  // const myVCard = new VCard()
+  const myVCard = new VCard()
 
   // Some variables
-  // const lastname = 'Desloovere'
-  // const firstname = 'Jeroen'
-  // const additional = ''
-  // const prefix = ''
-  // const suffix = ''
+  const lastname = 'Desloovere'
+  const firstname = 'Jeroen'
+  const additional = ''
+  const prefix = ''
+  const suffix = ''
 
-  // myVCard
-  // Add personal data
-  // .addName(values.lastname, values.firstname, additional, prefix, suffix)
-  // Add work data
-  // .addCompany(values.company)
-  // .addJobtitle(values.title)
-  // .addRole('Data Protection Officer')
-  // .addEmail(values.email)
-  // .addPhoneNumber(1234121212, 'PREF;WORK')
-  // .addPhoneNumber(values.phone, 'WORK')
-  // .addAddress(
-  //   null,
-  //   null,
-  //   'street',
-  //   'worktown',
-  //   null,
-  //   'workpostcode',
-  //   'Belgium'
-  // )
-  // .addSocial('https://twitter.com/desloovere_j', 'Twitter', 'desloovere_j')
-  // .addURL('http://www.jeroendesloovere.be')
+  myVCard
+    // Add personal data
+    .addName(
+      vcardValues.lastname,
+      vcardValues.firstname,
+      additional,
+      prefix,
+      suffix
+    )
+    // Add work data
+    .addCompany(vcardValues.company)
+    .addJobtitle(vcardValues.title)
+    // .addRole('Data Protection Officer')
+    .addEmail(vcardValues.email)
+    // .vcardValues(1234121212, 'PREF;WORK')
+    .addPhoneNumber(vcardValues.phone, 'WORK')
+    // .addAddress(
+    //   null,
+    //   null,
+    //   'street',
+    //   'worktown',
+    //   null,
+    //   'workpostcode',
+    //   'Belgium'
+    // )
+    // .addSocial('https://twitter.com/desloovere_j', 'Twitter', 'desloovere_j')
+    // .addURL('http://www.jeroendesloovere.be')
+    .addPhotoURL(vcardValues.photo)
 
-  // return myVCard
+  return myVCard
 }
 
 const makeVCardVersion = () => `VERSION:3.0`
