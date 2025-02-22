@@ -17,13 +17,13 @@ function App() {
       }
     }
 
-    const handleKeyDown = (event) => {
-      console.log(event.key)
-      if (event.key === 'PrintScreen') {
-        console.log('Screenshot detected')
-        setIsScreenshotDetected(true)
-      }
-    }
+    // const handleKeyDown = (event) => {
+    //   console.log(event.key)
+    //   if (event.key === 'PrintScreen') {
+    //     console.log('Screenshot detected')
+    //     setIsScreenshotDetected(true)
+    //   }
+    // }
 
     // const handleTouchStart = () => {
     //   console.log('Touch event detected')
@@ -35,7 +35,7 @@ function App() {
 
     const handleFocus = () => {
       setEventName('Window is focused')
-      setIsScreenshotDetected(false)
+      // setIsScreenshotDetected(false)
     }
 
     const handlePageHide = () => {
@@ -45,25 +45,25 @@ function App() {
 
     const handlePageShow = () => {
       setEventName('Page is visible')
-      setIsScreenshotDetected(false)
+      // setIsScreenshotDetected(false)
     }
 
     document.addEventListener('visibilitychange', handleVisibilityChange)
-    window.addEventListener('keydown', handleKeyDown)
+    // window.addEventListener('keydown', handleKeyDown)
     // window.addEventListener('touchstart', handleTouchStart)
-    window.addEventListener('blur', handleBlur)
-    window.addEventListener('focus', handleFocus)
-    window.addEventListener('pagehide', handlePageHide)
-    window.addEventListener('pageshow', handlePageShow)
+    // window.addEventListener('blur', handleBlur)
+    // window.addEventListener('focus', handleFocus)
+    // window.addEventListener('pagehide', handlePageHide)
+    // window.addEventListener('pageshow', handlePageShow)
 
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange)
-      window.removeEventListener('keydown', handleKeyDown)
+      // window.removeEventListener('keydown', handleKeyDown)
       // window.removeEventListener('touchstart', handleTouchStart)
-      window.removeEventListener('blur', handleBlur)
-      window.removeEventListener('focus', handleFocus)
-      window.removeEventListener('pagehide', handlePageHide)
-      window.removeEventListener('pageshow', handlePageShow)
+      // window.removeEventListener('blur', handleBlur)
+      // window.removeEventListener('focus', handleFocus)
+      // window.removeEventListener('pagehide', handlePageHide)
+      // window.removeEventListener('pageshow', handlePageShow)
     }
   }, [])
 
