@@ -1,5 +1,15 @@
 import { useState } from 'react'
-import { Layout, Input, Checkbox, Col, Row, Typography, Button } from 'antd'
+import {
+  Layout,
+  Input,
+  Checkbox,
+  Col,
+  Row,
+  Typography,
+  Button,
+  Upload,
+} from 'antd'
+import { UploadOutlined } from '@ant-design/icons'
 
 import '../../App.css'
 
@@ -14,6 +24,7 @@ const FORM_FIELD = {
   TITLE: 'title',
   PHONE: 'phone',
   EMAIL: 'email',
+  PHOTO: 'photo',
 }
 function Vcard() {
   const [formValue, setFormValue] = useState({
@@ -23,6 +34,7 @@ function Vcard() {
     [FORM_FIELD.TITLE]: { text: '', checked: false },
     [FORM_FIELD.PHONE]: { text: '', checked: false },
     [FORM_FIELD.EMAIL]: { text: '', checked: false },
+    [FORM_FIELD.PHOTO]: { file: null, checked: false },
   })
   const getInputType = (key) => {
     switch (key) {
@@ -43,8 +55,19 @@ function Vcard() {
       [key]: { ...prev[key], checked: value },
     }))
   }
+  const handleFileChange = (info) => {
+    if (info.file.status === 'done') {
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        setFormValue((prev) => ({
+          ...prev,
+          [FORM_FIELD.PHOTO]: { file: e.target.result, checked: true },
+        }))
+      }
+      reader.readAsDataURL(info.file.originFileObj)
+    }
+  }
   const downloadToFile = (content, filename, contentType) => {
-    console.log(content)
     const file = new Blob([content], { type: contentType })
     const url = window.URL.createObjectURL(file)
     const a = document.createElement('a')
@@ -92,14 +115,34 @@ function Vcard() {
                 <Text type="secondary">{FORM_FIELD[item]}:</Text>
               </Col>
               <Col span={24}>
-                <Input
-                  placeholder={FORM_FIELD[item]}
-                  value={formValue[FORM_FIELD[item]].text}
-                  type={getInputType(FORM_FIELD[item])}
-                  onChange={(e) => {
-                    handleTextChange(FORM_FIELD[item], e.target.value)
-                  }}
-                />
+                {FORM_FIELD[item] === FORM_FIELD.PHOTO ? (
+                  <>
+                    <Upload
+                      name="photo"
+                      listType="picture"
+                      showUploadList={false}
+                      onChange={handleFileChange}
+                    >
+                      <Button icon={<UploadOutlined />}>Upload Photo</Button>
+                    </Upload>
+                    {formValue[FORM_FIELD.PHOTO].file && (
+                      <img
+                        src={formValue[FORM_FIELD.PHOTO].file}
+                        alt="Preview"
+                        style={{ marginTop: '10px', width: '100px' }}
+                      />
+                    )}
+                  </>
+                ) : (
+                  <Input
+                    placeholder={FORM_FIELD[item]}
+                    value={formValue[FORM_FIELD[item]].text}
+                    type={getInputType(FORM_FIELD[item])}
+                    onChange={(e) => {
+                      handleTextChange(FORM_FIELD[item], e.target.value)
+                    }}
+                  />
+                )}
               </Col>
               <Col span={24}>
                 <Checkbox

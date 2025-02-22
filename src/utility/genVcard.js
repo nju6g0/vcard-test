@@ -1,26 +1,36 @@
 import VCard from 'vcard-creator'
 
-function genVcardFromCreator(values) {
+function genVcardFromCreator(vcardValues) {
+  let vcard = 'BEGIN:VCARD\nVERSION:3.0\n'
+  Object.keys(vcardValues).forEach((key) => {
+    if (key === 'photo') {
+      vcard += `PHOTO;ENCODING=b;TYPE=JPEG:${vcardValues[key]}\n`
+    } else {
+      vcard += `${key.toUpperCase()}:${vcardValues[key]}\n`
+    }
+  })
+  vcard += 'END:VCARD'
+  return vcard
   // Define a new vCard
-  const myVCard = new VCard()
+  // const myVCard = new VCard()
 
   // Some variables
   // const lastname = 'Desloovere'
   // const firstname = 'Jeroen'
-  const additional = ''
-  const prefix = ''
-  const suffix = ''
+  // const additional = ''
+  // const prefix = ''
+  // const suffix = ''
 
-  myVCard
-    // Add personal data
-    .addName(values.lastname, values.firstname, additional, prefix, suffix)
-    // Add work data
-    .addCompany(values.company)
-    .addJobtitle(values.title)
-    // .addRole('Data Protection Officer')
-    .addEmail(values.email)
-    // .addPhoneNumber(1234121212, 'PREF;WORK')
-    .addPhoneNumber(values.phone, 'WORK')
+  // myVCard
+  // Add personal data
+  // .addName(values.lastname, values.firstname, additional, prefix, suffix)
+  // Add work data
+  // .addCompany(values.company)
+  // .addJobtitle(values.title)
+  // .addRole('Data Protection Officer')
+  // .addEmail(values.email)
+  // .addPhoneNumber(1234121212, 'PREF;WORK')
+  // .addPhoneNumber(values.phone, 'WORK')
   // .addAddress(
   //   null,
   //   null,
@@ -33,7 +43,7 @@ function genVcardFromCreator(values) {
   // .addSocial('https://twitter.com/desloovere_j', 'Twitter', 'desloovere_j')
   // .addURL('http://www.jeroendesloovere.be')
 
-  return myVCard
+  // return myVCard
 }
 
 const makeVCardVersion = () => `VERSION:3.0`
