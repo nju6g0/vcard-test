@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Layout, Input, Checkbox, Col, Row, Typography, Button } from 'antd'
 import './App.css'
 
+import { genVcard } from './utility/genVcard'
+
 const { Text } = Typography
 
 const FORM_FIELD = {
@@ -38,8 +40,23 @@ function App() {
       [key]: { ...prev[key], checked: value },
     }))
   }
+  const downloadToFile = (content, filename, contentType) => {
+    const a = document.createElement('a')
+    const file = new Blob([content], { type: contentType })
+
+    a.href = URL.createObjectURL(file)
+    a.download = filename
+    a.click()
+
+    URL.revokeObjectURL(a.href)
+  }
   const handleDownload = () => {
-    console.log(formValue)
+    let vcardValues = {}
+    Object.keys(formValue).forEach((key) => {
+      vcardValues[key] = formValue[key].text
+    })
+    const vcard = genVcard(vcardValues)
+    downloadToFile(vcard, 'vcard.vcf', 'text/vcard')
   }
   return (
     <div className="App">
