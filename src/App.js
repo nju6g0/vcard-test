@@ -4,14 +4,15 @@ import Vcard from './components/Vcard'
 
 function App() {
   const [isScreenshotDetected, setIsScreenshotDetected] = useState(false)
+  const [eventName, setEventName] = useState('')
 
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.hidden) {
-        console.log('Document is hidden')
+        setEventName('Document is hidden')
         setIsScreenshotDetected(true)
       } else {
-        console.log('Document is visible')
+        setEventName('Document is visible')
         // setIsScreenshotDetected(false)
       }
     }
@@ -28,12 +29,22 @@ function App() {
     //   console.log('Touch event detected')
     // }
     const handleBlur = () => {
-      console.log('Window is blurred')
+      setEventName('Window is blurred')
       setIsScreenshotDetected(true)
     }
 
     const handleFocus = () => {
-      console.log('Window is focused')
+      setEventName('Window is focused')
+      setIsScreenshotDetected(false)
+    }
+
+    const handlePageHide = () => {
+      setEventName('Page is hidden')
+      setIsScreenshotDetected(true)
+    }
+
+    const handlePageShow = () => {
+      setEventName('Page is visible')
       setIsScreenshotDetected(false)
     }
 
@@ -42,6 +53,8 @@ function App() {
     // window.addEventListener('touchstart', handleTouchStart)
     window.addEventListener('blur', handleBlur)
     window.addEventListener('focus', handleFocus)
+    window.addEventListener('pagehide', handlePageHide)
+    window.addEventListener('pageshow', handlePageShow)
 
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange)
@@ -49,6 +62,8 @@ function App() {
       // window.removeEventListener('touchstart', handleTouchStart)
       window.removeEventListener('blur', handleBlur)
       window.removeEventListener('focus', handleFocus)
+      window.removeEventListener('pagehide', handlePageHide)
+      window.removeEventListener('pageshow', handlePageShow)
     }
   }, [])
 
@@ -56,13 +71,15 @@ function App() {
     return (
       <div
         style={{ width: '100vw', height: '100vh', backgroundColor: 'black' }}
-      ></div>
+      >
+        <p style={{ color: '#fff' }}>{eventName}</p>
+      </div>
     )
   }
 
   return (
     <>
-      <p>test visibility change</p>
+      <p>{eventName}</p>
       <Vcard />
     </>
   )
