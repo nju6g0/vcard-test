@@ -44,19 +44,27 @@ function App() {
     const a = document.createElement('a')
     const file = new Blob([content], { type: contentType })
 
-    a.href = URL.createObjectURL(file)
-    a.download = filename
+    a.href = window.URL.createObjectURL(file)
+    a.setAttribute('download', filename)
+    document.body.appendChild(a)
     a.click()
-
-    URL.revokeObjectURL(a.href)
+    a.parentNode.removeChild(a)
   }
-  const handleDownload = () => {
+  const handleDownload = (e) => {
+    e.preventDefault()
+
     let vcardValues = {}
     Object.keys(formValue).forEach((key) => {
-      vcardValues[key] = formValue[key].text
+      if (formValue[key].checked) {
+        vcardValues[key] = formValue[key].text
+      }
     })
     const vcard = genVcard(vcardValues)
-    downloadToFile(vcard, 'vcard.vcf', 'text/vcard')
+    downloadToFile(
+      vcard,
+      `${formValue[FORM_FIELD.NAME].text}Vcard.vcf`,
+      'text/vcard'
+    )
   }
   return (
     <div className="App">
