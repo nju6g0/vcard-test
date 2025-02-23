@@ -4,7 +4,6 @@ import { Button, Flex } from 'antd'
 
 import useScreenshotDetection from './hooks/useScreenshotDetection'
 import usePushNotification from './hooks/usePushNotification'
-// import { messaging } from './firebase'
 
 import './App.css'
 
@@ -36,20 +35,6 @@ function App() {
   //     window.removeEventListener('pagehide', handlePageHide)
   //     window.removeEventListener('pageshow', handlePageShow)
   //   }
-  // }, [])
-
-  // useEffect(() => {
-  //   messaging
-  //     .requestPermission()
-  //     .then(() => {
-  //       return messaging.getToken()
-  //     })
-  //     .then((token) => {
-  //       console.log('Token:', token)
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error:', error)
-  //     })
   // }, [])
 
   return (
