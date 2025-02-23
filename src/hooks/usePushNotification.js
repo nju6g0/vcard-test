@@ -14,7 +14,8 @@ const usePushNotification = () => {
     if (Notification.permission !== 'granted') {
       Notification.requestPermission().then((permission) => {
         if (permission === 'granted') {
-          subscribeUser()
+          // subscribeUser()
+          console.log('通知權限已獲得')
         }
       })
     } else {
@@ -25,7 +26,8 @@ const usePushNotification = () => {
   const subscribeUser = () => {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.ready.then((registration) => {
-        const publicVapidKey = 'YOUR_PUBLIC_VAPID_KEY'
+        const publicVapidKey =
+          'BCb_d34kzifv2D_y243izBR34wDljVafSWKQ0LzMeAngl1UxlsbvoAnAQHh9pyVZAixLIB2FL-bpvA4WiUkxgW0'
         const convertedVapidKey = urlBase64ToUint8Array(publicVapidKey)
         registration.pushManager
           .subscribe({
