@@ -63,9 +63,13 @@ const usePushNotification = () => {
   const pushNotification = (message) => {
     console.log(message)
     if (Notification.permission === 'granted') {
-      console.log(Notification)
-      // new Notification(message)
-      new Notification('測試通知', { body: '這是一個測試通知' })
+      // console.log(Notification)
+      try {
+        new Notification('測試通知', { body: message })
+        console.log('通知已發送')
+      } catch (error) {
+        console.error('通知發送失敗:', error)
+      }
     } else {
       console.log('Notification permission not granted') // 添加日誌
     }

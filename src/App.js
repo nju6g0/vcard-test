@@ -1,45 +1,56 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import Vcard from './components/Vcard'
+import { Button, Flex } from 'antd'
+
+import useScreenshotDetection from './hooks/useScreenshotDetection'
+import usePushNotification from './hooks/usePushNotification'
+
+import './App.css'
 
 function App() {
-  const [notificationText, setNotificationText] = useState('這是一個測試通知')
+  const { isScreenshotDetected, eventName } = useScreenshotDetection()
+  const { pushNotification, requestPermission } = usePushNotification()
+  const [notificationText, setNotificationText] = useState('測試')
 
-  const requestPermission = () => {
-    if (Notification.permission !== 'granted') {
-      Notification.requestPermission().then((permission) => {
-        if (permission === 'granted') {
-          console.log('通知權限已獲得')
-        } else {
-          console.log('通知權限被拒絕')
-        }
-      })
-    } else {
-      console.log('通知權限已經獲得')
-    }
+  // if (isScreenshotDetected) {
+  //   pushNotification(eventName)
+  // }
+
+  const handlePageHide = () => {
+    setNotificationText('Page is hidden')
+    pushNotification('Page is hidden')
+  }
+  const handlePageShow = () => {
+    setNotificationText('Page is visible')
   }
 
-  const showNotification = () => {
-    console.log('showNotification')
-    if (Notification.permission === 'granted') {
-      console.log('通知權限已獲得')
-      try {
-        new Notification('測試通知', { body: notificationText })
-        console.log('通知已發送')
-      } catch (error) {
-        console.error('通知發送失敗:', error)
-      }
-    } else {
-      console.log('通知權限未獲得')
+  // useEffect(() => {
+  //   pushNotification(notificationText)
+  // }, [notificationText, pushNotification])
+
+  useEffect(() => {
+    window.addEventListener('pagehide', handlePageHide)
+    window.addEventListener('pageshow', handlePageShow)
+    return () => {
+      window.removeEventListener('pagehide', handlePageHide)
+      window.removeEventListener('pageshow', handlePageShow)
     }
-  }
+  }, [])
 
   return (
     <div>
-      <button type="button" onClick={requestPermission}>
-        Enable Push Notifications
-      </button>
-      <button type="button" onClick={showNotification}>
-        Show Notification
-      </button>
+      <p className="text">{eventName}</p>
+      <Button onClick={requestPermission}>Enable Push Notifications</Button>
+      <Button
+        onClick={() => {
+          // console.log(showNotification)
+          pushNotification('這是一個測試')
+        }}
+      >
+        show notification
+      </Button>
+      <Vcard />
+      {isScreenshotDetected && <div className="cover" />}
     </div>
   )
 }
