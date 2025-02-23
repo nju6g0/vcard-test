@@ -56,16 +56,16 @@ function Vcard() {
     }))
   }
   const handleFileChange = (info) => {
-    if (info.file.status === 'done') {
-      const reader = new FileReader()
-      reader.onload = (e) => {
-        setFormValue((prev) => ({
-          ...prev,
-          [FORM_FIELD.PHOTO]: { file: e.target.result, checked: true },
-        }))
-      }
-      reader.readAsDataURL(info.file.originFileObj)
+    // if (info.file.status === 'done') {
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      setFormValue((prev) => ({
+        ...prev,
+        [FORM_FIELD.PHOTO]: { file: e.target.result, checked: true },
+      }))
     }
+    reader.readAsDataURL(info.file.originFileObj)
+    // }
   }
   const downloadToFile = (content, filename, contentType) => {
     const file = new Blob([content], { type: contentType })
@@ -102,65 +102,63 @@ function Vcard() {
     )
   }
   return (
-    <div className="App">
-      <main>
-        <Layout className="form">
-          {Object.keys(FORM_FIELD).map((item) => (
-            <Row
-              className="row"
-              key={FORM_FIELD[item]}
-              justify="space-between"
-              align="middle"
-            >
-              <Col className="label" span={24}>
-                <Text type="secondary">{FORM_FIELD[item]}:</Text>
-              </Col>
-              <Col span={24}>
-                {FORM_FIELD[item] === FORM_FIELD.PHOTO ? (
-                  <>
-                    <Upload
-                      name="photo"
-                      listType="picture"
-                      showUploadList={false}
-                      onChange={handleFileChange}
-                    >
-                      <Button icon={<UploadOutlined />}>Upload Photo</Button>
-                    </Upload>
-                    {formValue[FORM_FIELD.PHOTO].file && (
-                      <img
-                        src={formValue[FORM_FIELD.PHOTO].file}
-                        alt="Preview"
-                        style={{ marginTop: '10px', width: '100px' }}
-                      />
-                    )}
-                  </>
-                ) : (
-                  <Input
-                    placeholder={FORM_FIELD[item]}
-                    value={formValue[FORM_FIELD[item]].text}
-                    type={getInputType(FORM_FIELD[item])}
-                    onChange={(e) => {
-                      handleTextChange(FORM_FIELD[item], e.target.value)
-                    }}
-                  />
-                )}
-              </Col>
-              <Col span={24}>
-                <Checkbox
-                  checked={formValue[FORM_FIELD[item]].checked}
+    <main>
+      <Layout className="form">
+        {Object.keys(FORM_FIELD).map((item) => (
+          <Row
+            className="row"
+            key={FORM_FIELD[item]}
+            justify="space-between"
+            align="middle"
+          >
+            <Col className="label" span={24}>
+              <Text type="secondary">{FORM_FIELD[item]}:</Text>
+            </Col>
+            <Col span={24}>
+              {FORM_FIELD[item] === FORM_FIELD.PHOTO ? (
+                <>
+                  <Upload
+                    name="photo"
+                    listType="picture"
+                    showUploadList={false}
+                    onChange={handleFileChange}
+                  >
+                    <Button icon={<UploadOutlined />}>Upload Photo</Button>
+                  </Upload>
+                  {formValue[FORM_FIELD.PHOTO].file && (
+                    <img
+                      src={formValue[FORM_FIELD.PHOTO].file}
+                      alt="Preview"
+                      style={{ marginTop: '10px', width: '100px' }}
+                    />
+                  )}
+                </>
+              ) : (
+                <Input
+                  placeholder={FORM_FIELD[item]}
+                  value={formValue[FORM_FIELD[item]].text}
+                  type={getInputType(FORM_FIELD[item])}
                   onChange={(e) => {
-                    handleCheckChange(FORM_FIELD[item], e.target.checked)
+                    handleTextChange(FORM_FIELD[item], e.target.value)
                   }}
-                >
-                  available for download
-                </Checkbox>
-              </Col>
-            </Row>
-          ))}
-          <Button onClick={handleDownload}>Download</Button>
-        </Layout>
-      </main>
-    </div>
+                />
+              )}
+            </Col>
+            <Col span={24}>
+              <Checkbox
+                checked={formValue[FORM_FIELD[item]].checked}
+                onChange={(e) => {
+                  handleCheckChange(FORM_FIELD[item], e.target.checked)
+                }}
+              >
+                available for download
+              </Checkbox>
+            </Col>
+          </Row>
+        ))}
+        <Button onClick={handleDownload}>Download</Button>
+      </Layout>
+    </main>
   )
 }
 

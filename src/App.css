@@ -2,6 +2,14 @@ main{
     background-color: #f5f5f5;
     padding: 20px 0;
 }
+.cover {
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
 .form {
     padding: 0 20px;
     width: 375px;
@@ -11,12 +19,8 @@ main{
 .row {
     margin-bottom: 8px;
 }
-.lable {
-
+.text {
+    color: #fff;
+    position: absolute;
+    z-index: 1;
 }
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
