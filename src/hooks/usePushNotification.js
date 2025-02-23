@@ -17,6 +17,8 @@ const usePushNotification = () => {
           subscribeUser()
         }
       })
+    } else {
+      console.log('Notification permission already granted') // 添加日誌
     }
   }
 
@@ -56,13 +58,18 @@ const usePushNotification = () => {
     return outputArray
   }
 
-  const showNotification = (message) => {
+  const pushNotification = (message) => {
+    console.log(message)
     if (Notification.permission === 'granted') {
-      new Notification(message)
+      console.log(Notification)
+      // new Notification(message)
+      new Notification('測試通知', { body: '這是一個測試通知' })
+    } else {
+      console.log('Notification permission not granted') // 添加日誌
     }
   }
 
-  return { showNotification, requestPermission }
+  return { pushNotification, requestPermission }
 }
 
 export default usePushNotification
