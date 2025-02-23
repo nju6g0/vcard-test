@@ -1,7 +1,16 @@
 import { useEffect } from 'react'
 
 const usePushNotification = () => {
-  useEffect(() => {
+  // useEffect(() => {
+  //   if (Notification.permission !== 'granted') {
+  //     Notification.requestPermission().then((permission) => {
+  //       if (permission === 'granted') {
+  //         subscribeUser()
+  //       }
+  //     })
+  //   }
+  // }, [])
+  const requestPermission = () => {
     if (Notification.permission !== 'granted') {
       Notification.requestPermission().then((permission) => {
         if (permission === 'granted') {
@@ -9,7 +18,7 @@ const usePushNotification = () => {
         }
       })
     }
-  }, [])
+  }
 
   const subscribeUser = () => {
     if ('serviceWorker' in navigator) {
@@ -53,7 +62,7 @@ const usePushNotification = () => {
     }
   }
 
-  return { showNotification }
+  return { showNotification, requestPermission }
 }
 
 export default usePushNotification

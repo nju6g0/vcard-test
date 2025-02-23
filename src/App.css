@@ -21,6 +21,6 @@ main{
 }
 .text {
     color: #fff;
-    position: absolute;
+    /* position: absolute; */
     z-index: 1;
 }
