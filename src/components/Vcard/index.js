@@ -13,7 +13,7 @@ import { UploadOutlined } from '@ant-design/icons'
 
 import '../../App.css'
 
-import { genVcardFromCreator } from '../../utility/genVcard'
+import { vcardCreator } from '../../utility/genVcard'
 
 const { Text } = Typography
 
@@ -93,8 +93,8 @@ function Vcard() {
           key === 'photo' ? formValue[key].file : formValue[key].text
       }
     })
-    // const vcard = genVcard(vcardValues)
-    const vcard = genVcardFromCreator(vcardValues)
+
+    const vcard = vcardCreator(vcardValues)
     downloadToFile(
       vcard,
       `${formValue[FORM_FIELD.FIRSTNAME].text}Vcard.vcf`,

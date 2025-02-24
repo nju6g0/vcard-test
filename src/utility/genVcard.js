@@ -1,6 +1,6 @@
 import VCard from 'vcard-creator'
 
-function genVcardFromCreator(vcardValues) {
+function vcardCreator(vcardValues) {
   // let vcard = 'BEGIN:VCARD\nVERSION:3.0\n'
   // Object.keys(vcardValues).forEach((key) => {
   //   if (key === 'photo') {
@@ -51,7 +51,8 @@ function genVcardFromCreator(vcardValues) {
     // .addSocial('https://twitter.com/desloovere_j', 'Twitter', 'desloovere_j')
     // .addURL('http://www.jeroendesloovere.be')
     // .addPhotoURL(vcardValues.photo)
-    .addPhoto(vcardValues.photo, 'JPEG')
+    .addLogo(vcardValues.photo, 'JPEG')
+  // .addLogoURL('http://www.jeroendesloovere.be')
 
   return myVCard
 }
@@ -84,4 +85,4 @@ const genVcard = (values) => {
   return vcard
 }
 
-export { genVcardFromCreator, genVcard }
+export { vcardCreator, genVcard }
