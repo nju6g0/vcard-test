@@ -11,7 +11,7 @@ const usePushNotification = () => {
   //   }
   // }, [])
   const isPushNotificationSupported = () => {
-    return "serviceWorker" in navigator && "PushManager" in window
+    return 'serviceWorker' in navigator && 'PushManager' in window
   }
 
   const requestPermission = () => {
@@ -31,7 +31,7 @@ const usePushNotification = () => {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.ready.then((registration) => {
         const publicVapidKey =
-          'BCb_d34kzifv2D_y243izBR34wDljVafSWKQ0LzMeAngl1UxlsbvoAnAQHh9pyVZAixLIB2FL-bpvA4WiUkxgW0'
+          'BLCVYzOCnYdXnaPdB9C0peTBjtd-BakzqQTGOL5zNA7Q2HZDMuzomhvhcsb3L_0Qczpm6sp2R-eEVGpzaroeZMw'
         const convertedVapidKey = urlBase64ToUint8Array(publicVapidKey)
         registration.pushManager
           .subscribe({
@@ -39,13 +39,17 @@ const usePushNotification = () => {
             applicationServerKey: convertedVapidKey,
           })
           .then((subscription) => {
-            fetch('/subscribe', {
-              method: 'POST',
-              body: JSON.stringify(subscription),
-              headers: {
-                'Content-Type': 'application/json',
-              },
-            })
+            // fetch('/subscribe', {
+            //   method: 'POST',
+            //   body: JSON.stringify(subscription),
+            //   headers: {
+            //     'Content-Type': 'application/json',
+            //   },
+            // })
+            console.log('推送訂閱資訊:', JSON.stringify(subscription))
+          })
+          .catch((error) => {
+            console.error('推送訂閱失敗:', error)
           })
       })
     }
