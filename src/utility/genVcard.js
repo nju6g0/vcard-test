@@ -1,7 +1,6 @@
 import VCard from 'vcard-creator'
 
 function genVcardFromCreator(vcardValues) {
-  // console.log(vcardValues)
   // let vcard = 'BEGIN:VCARD\nVERSION:3.0\n'
   // Object.keys(vcardValues).forEach((key) => {
   //   if (key === 'photo') {
@@ -51,7 +50,8 @@ function genVcardFromCreator(vcardValues) {
     // )
     // .addSocial('https://twitter.com/desloovere_j', 'Twitter', 'desloovere_j')
     // .addURL('http://www.jeroendesloovere.be')
-    .addPhotoURL(vcardValues.photo)
+    // .addPhotoURL(vcardValues.photo)
+    .addPhoto(vcardValues.photo)
 
   return myVCard
 }

@@ -41,8 +41,9 @@ function App() {
     <div>
       {/* <p className="text">{eventName}</p> */}
       <p>Push Notification are {!isPushNotificationSupported() && 'NOT'} supported by your device</p>
-      <Button onClick={requestPermission}>Enable Push Notifications</Button>
+      <Button disabled={!isPushNotificationSupported()} onClick={requestPermission}>Enable Push Notifications</Button>
       <Button
+        disabled={!isPushNotificationSupported()}
         onClick={() => {
           // console.log(showNotification)
           pushNotification('這是一個測試')
