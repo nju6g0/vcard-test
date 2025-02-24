@@ -16,7 +16,6 @@ const useScreenshotDetection = () => {
     }
 
     const handleKeyDown = (event) => {
-      console.log(event.key)
       setIsScreenshotDetected(false)
     }
 

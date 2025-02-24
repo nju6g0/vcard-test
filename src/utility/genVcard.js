@@ -51,7 +51,7 @@ function genVcardFromCreator(vcardValues) {
     // .addSocial('https://twitter.com/desloovere_j', 'Twitter', 'desloovere_j')
     // .addURL('http://www.jeroendesloovere.be')
     // .addPhotoURL(vcardValues.photo)
-    .addPhoto(vcardValues.photo)
+    .addPhoto(vcardValues.photo, 'JPEG')
 
   return myVCard
 }

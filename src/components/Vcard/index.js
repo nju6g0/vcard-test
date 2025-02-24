@@ -122,7 +122,7 @@ function Vcard() {
                     listType="picture"
                     showUploadList={false}
                     onChange={handleFileChange}
-                    accept="image"
+                    accept=".jepg, .jpg"
                   >
                     <Button icon={<UploadOutlined />}>Upload Photo</Button>
                   </Upload>
