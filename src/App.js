@@ -11,6 +11,7 @@ function App() {
   const { isScreenshotDetected, eventName } = useScreenshotDetection()
   const { pushNotification, requestPermission } = usePushNotification()
   const [notificationText, setNotificationText] = useState('測試')
+  const [isSuported, setIsSupported] = useState(false);
 
   // if (isScreenshotDetected) {
   //   pushNotification(eventName)
@@ -27,6 +28,11 @@ function App() {
   // useEffect(() => {
   //   pushNotification(notificationText)
   // }, [notificationText, pushNotification])
+  useEffect(() => {
+    if("serviceWorker" in navigator && "PushManager" in window){
+      setIsSupported(true)
+    }
+  }, [])
 
   useEffect(() => {
     window.addEventListener('pagehide', handlePageHide)
@@ -40,6 +46,7 @@ function App() {
   return (
     <div>
       <p className="text">{eventName}</p>
+      <p>Push Notification are {!isSuported && 'NOT'} supported by your device</p>
       <Button onClick={requestPermission}>Enable Push Notifications</Button>
       <Button
         onClick={() => {

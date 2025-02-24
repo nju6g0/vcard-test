@@ -10,11 +10,12 @@ const usePushNotification = () => {
   //     })
   //   }
   // }, [])
+
   const requestPermission = () => {
     if (Notification.permission !== 'granted') {
       Notification.requestPermission().then((permission) => {
         if (permission === 'granted') {
-          // subscribeUser()
+          subscribeUser()
           console.log('通知權限已獲得')
         }
       })
