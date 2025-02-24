@@ -11,7 +11,6 @@ function App() {
   const { isScreenshotDetected, eventName } = useScreenshotDetection()
   const { pushNotification, requestPermission, isPushNotificationSupported } = usePushNotification()
   const [notificationText, setNotificationText] = useState('測試')
-  const [isSupported, setIsSupported] = useState(false);
 
   // if (isScreenshotDetected) {
   //   pushNotification(eventName)
@@ -25,12 +24,6 @@ function App() {
     setNotificationText('Page is visible')
   }
 
-useEffect(() => {
-  if("serviceWorker" in navigator && "PushManager" in window){
-    setIsSupported(true);
-  }
-  console.log(isPushNotificationSupported())
-}, [isPushNotificationSupported])
   // useEffect(() => {
   //   pushNotification(notificationText)
   // }, [notificationText, pushNotification])
@@ -47,9 +40,6 @@ useEffect(() => {
   return (
     <div>
       {/* <p className="text">{eventName}</p> */}
-      <p>{"serviceWorker" in navigator && "PushManager" in window ? 'true': 'false'}</p>
-      <p>{isPushNotificationSupported()? 'true': 'false'}</p>
-      <p>Push Notification are {!isSupported && 'NOT'} supported by your device</p>
       <p>Push Notification are {!isPushNotificationSupported() && 'NOT'} supported by your device</p>
       <Button onClick={requestPermission}>Enable Push Notifications</Button>
       <Button
@@ -61,7 +51,7 @@ useEffect(() => {
         show notification
       </Button>
       <Vcard />
-      {/* {isScreenshotDetected && <div className="cover" />} */}
+      {isScreenshotDetected && <div className="cover" />}
     </div>
   )
 }
