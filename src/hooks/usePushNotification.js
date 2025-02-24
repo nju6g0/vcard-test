@@ -10,6 +10,9 @@ const usePushNotification = () => {
   //     })
   //   }
   // }, [])
+  const isPushNotificationSupported = () => {
+    return "serviceWorker" in navigator && "PushManager" in window
+  }
 
   const requestPermission = () => {
     if (Notification.permission !== 'granted') {
@@ -76,7 +79,7 @@ const usePushNotification = () => {
     }
   }
 
-  return { pushNotification, requestPermission }
+  return { pushNotification, requestPermission, isPushNotificationSupported }
 }
 
 export default usePushNotification
