@@ -29,7 +29,8 @@ useEffect(() => {
   if("serviceWorker" in navigator && "PushManager" in window){
     setIsSupported(true);
   }
-}, [])
+  console.log(isPushNotificationSupported())
+}, [isPushNotificationSupported])
   // useEffect(() => {
   //   pushNotification(notificationText)
   // }, [notificationText, pushNotification])
@@ -46,8 +47,10 @@ useEffect(() => {
   return (
     <div>
       {/* <p className="text">{eventName}</p> */}
-      <p>{"serviceWorker" in navigator && "PushManager" in window}</p>
+      <p>{"serviceWorker" in navigator && "PushManager" in window ? 'true': 'false'}</p>
+      <p>{isPushNotificationSupported()? 'true': 'false'}</p>
       <p>Push Notification are {!isSupported && 'NOT'} supported by your device</p>
+      <p>Push Notification are {!isPushNotificationSupported() && 'NOT'} supported by your device</p>
       <Button onClick={requestPermission}>Enable Push Notifications</Button>
       <Button
         onClick={() => {
@@ -58,7 +61,7 @@ useEffect(() => {
         show notification
       </Button>
       <Vcard />
-      {isScreenshotDetected && <div className="cover" />}
+      {/* {isScreenshotDetected && <div className="cover" />} */}
     </div>
   )
 }
