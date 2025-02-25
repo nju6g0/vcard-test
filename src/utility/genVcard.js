@@ -51,7 +51,12 @@ function vcardCreator(vcardValues) {
     // .addSocial('https://twitter.com/desloovere_j', 'Twitter', 'desloovere_j')
     // .addURL('http://www.jeroendesloovere.be')
     // .addPhotoURL(vcardValues.photo)
-    .addLogo(vcardValues.photo, 'JPEG')
+    // PHOTO;TYPE=JPEG;VALUE=URI:https://upload.wikimedia.org/wikipedia/commons/8/87/My_Dog_%2861220578%29.jpeg
+    .addPhotoURL(
+      'https://upload.wikimedia.org/wikipedia/commons/8/87/My_Dog_%2861220578%29.jpeg'
+    )
+  // .addPhoto(vcardValues.photo, 'JPEG')
+  // .addLogo(vcardValues.photo, 'JPEG')
   // .addLogoURL('http://www.jeroendesloovere.be')
 
   return myVCard
