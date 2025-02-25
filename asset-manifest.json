@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/vcard-test/static/css/main.bba865e6.css",
-    "main.js": "/vcard-test/static/js/main.8f1e2a13.js",
+    "main.js": "/vcard-test/static/js/main.a723cea8.js",
     "static/js/453.9bf4b9f5.chunk.js": "/vcard-test/static/js/453.9bf4b9f5.chunk.js",
     "index.html": "/vcard-test/index.html",
     "main.bba865e6.css.map": "/vcard-test/static/css/main.bba865e6.css.map",
-    "main.8f1e2a13.js.map": "/vcard-test/static/js/main.8f1e2a13.js.map",
+    "main.a723cea8.js.map": "/vcard-test/static/js/main.a723cea8.js.map",
     "453.9bf4b9f5.chunk.js.map": "/vcard-test/static/js/453.9bf4b9f5.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.bba865e6.css",
-    "static/js/main.8f1e2a13.js"
+    "static/js/main.a723cea8.js"
   ]
 }

@@ -1,4 +1,3 @@
-console.log(self)
 self.addEventListener('install', (event) => {
   console.log('Service Worker 安裝中...')
   self.skipWaiting()
@@ -9,13 +8,19 @@ self.addEventListener('activate', (event) => {
 })
 
 self.addEventListener('push', (event) => {
-  console.log(event)
   const data = event.data.json()
-  console.log(data)
-  self.registration.showNotification(data.title, {
-    body: data.body,
-    data: data.data,
-  })
+  const promiseChain = self.registration
+    .showNotification(data.title, {
+      body: data.body,
+      data: data.data,
+    })
+    .then(() => {
+      console.log('push success')
+    })
+    .catch(() => {
+      console.log('push fail')
+    })
+  event.waitUntil(promiseChain)
 })
 
 self.addEventListener('notificationclick', (event) => {
