@@ -55,17 +55,18 @@ function Vcard() {
       [key]: { ...prev[key], checked: value },
     }))
   }
-  const handleFileChange = (info) => {
-    // if (info.file.status === 'done') {
+
+  const handleFileChange = async (info) => {
     const reader = new FileReader()
     reader.onload = (e) => {
+      // 移除 Data URI 開頭的 metadata
+      const base64String = e.target.result.split(',')[1]
       setFormValue((prev) => ({
         ...prev,
-        [FORM_FIELD.PHOTO]: { file: e.target.result, checked: true },
+        [FORM_FIELD.PHOTO]: { file: base64String, checked: true },
       }))
     }
     reader.readAsDataURL(info.file.originFileObj)
-    // }
   }
   const downloadToFile = (content, filename, contentType) => {
     const file = new Blob([content], { type: contentType })

@@ -52,10 +52,10 @@ function vcardCreator(vcardValues) {
     // .addURL('http://www.jeroendesloovere.be')
     // .addPhotoURL(vcardValues.photo)
     // PHOTO;TYPE=JPEG;VALUE=URI:https://upload.wikimedia.org/wikipedia/commons/8/87/My_Dog_%2861220578%29.jpeg
-    .addPhotoURL(
-      'https://upload.wikimedia.org/wikipedia/commons/8/87/My_Dog_%2861220578%29.jpeg'
-    )
-  // .addPhoto(vcardValues.photo, 'JPEG')
+    // .addPhotoURL(
+    //   'https://upload.wikimedia.org/wikipedia/commons/8/87/My_Dog_%2861220578%29.jpeg'
+    // )
+    .addPhoto(vcardValues.photo, 'JPEG')
   // .addLogo(vcardValues.photo, 'JPEG')
   // .addLogoURL('http://www.jeroendesloovere.be')
 
