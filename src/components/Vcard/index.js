@@ -63,7 +63,11 @@ function Vcard() {
       const base64String = e.target.result.split(',')[1]
       setFormValue((prev) => ({
         ...prev,
-        [FORM_FIELD.PHOTO]: { file: base64String, checked: true },
+        [FORM_FIELD.PHOTO]: {
+          file: base64String,
+          text: e.target.result,
+          checked: true,
+        },
       }))
     }
     reader.readAsDataURL(info.file.originFileObj)
@@ -129,7 +133,7 @@ function Vcard() {
                   </Upload>
                   {formValue[FORM_FIELD.PHOTO].file && (
                     <img
-                      src={formValue[FORM_FIELD.PHOTO].file}
+                      src={formValue[FORM_FIELD.PHOTO].text}
                       alt="Preview"
                       style={{ marginTop: '10px', width: '100px' }}
                     />
