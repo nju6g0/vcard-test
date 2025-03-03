@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 const Profile = () => {
   const { shortCode } = useParams()
@@ -10,7 +11,11 @@ const Profile = () => {
     window.history.replaceState(null, '', '/')
 
     const encodedShortCode = btoa(`${shortCode}${secretKey}`)
-    // window.location.href = `/redirect/${shortCode}`
+    const data = Cookies.get(encodedShortCode)
+    console.log(encodedShortCode)
+    if (!data) {
+      Cookies.set(encodedShortCode, new Date(), { expires: 0.1 })
+    }
     navigate(`/redirect/${encodedShortCode}`)
   }, [])
   return <div>Profile: ${shortCode}</div>
