@@ -9,7 +9,7 @@ import './App.css'
 
 function App() {
   return (
-    <Router>
+    <Router basename="vcard-test">
       <Routes>
         <Route path="/download" element={<Download />} />
         <Route path="/profile/:shortCode" element={<Profile />} />
