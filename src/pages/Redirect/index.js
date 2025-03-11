@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import Cookies from 'js-cookie'
+import { Flex } from 'antd'
 
 import ProfileCard from '../../components/ProfileCard'
 
@@ -29,6 +30,7 @@ const Redirect = () => {
     const currentTime = new Date()
     const timeDifference = (currentTime - cookieTime) / 1000 / 60 // 以分鐘為單位
     console.log(timeDifference)
+    // return
     if (timeDifference > TIMEOUT) {
       navigate(`/expired`)
     } else {
@@ -38,13 +40,13 @@ const Redirect = () => {
   }, [shortCode])
 
   return (
-    <div>
+    <Flex gap="middle" vertical justify="center" align="center">
       Redirect: {decodedShortCode}
       <button type="button" onClick={handleClick}>
         clear cookies
       </button>
       {!isLoading && <ProfileCard />}
-    </div>
+    </Flex>
   )
 }
 
